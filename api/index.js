@@ -1,6 +1,9 @@
-module.exports = require('twikoo-vercel')
+const regex = /^https:\/\/twikoo\.js\.org\/?$/
 
 module.exports = async (requestArg, responseArg) => {
-  console.log(JSON.stringify(requestArg.headers))
-  return await require('twikoo-vercel')(requestArg, responseArg)
+  if (regex.test(requestArg.headers.origin) && regex.test(requestArg.headers.referer)) {
+    return await require('twikoo-vercel')(requestArg, responseArg)
+  } else {
+    return responseArg.end('');
+  }
 }
