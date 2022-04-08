@@ -4,6 +4,6 @@ module.exports = async (requestArg, responseArg) => {
   if (regex.test(requestArg.headers.origin) && regex.test(requestArg.headers.referer)) {
     return await require('twikoo-vercel')(requestArg, responseArg)
   } else {
-    return responseArg.end('');
+    return responseArg.end('')
   }
 }
