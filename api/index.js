@@ -1474,7 +1474,7 @@ async function uploadImageToSmms ({ photo, fileName, config, res }) {
       Authorization: config.IMAGE_CDN_TOKEN
     }
   })
-  if (uploadResult.data.code === 200) {
+  if (uploadResult.data.success) {
     res.data = uploadResult.data.data
   } else {
     throw new Error(uploadResult.data.message)
