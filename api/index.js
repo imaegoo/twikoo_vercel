@@ -1486,10 +1486,14 @@ async function uploadImageToLsky ({ photo, fileName, config, res }) {
   const formData = new FormData()
   formData.append('file', base64UrlToReadStream(photo, fileName))
   const url = `${config.IMAGE_CDN}/api/v1/upload`
+  let token = config.IMAGE_CDN_TOKEN
+  if (!token.startsWith('Bearer')) {
+    token = `Bearer ${token}`
+  }
   const uploadResult = await axios.post(url, formData, {
     headers: {
       ...formData.getHeaders(),
-      Authorization: config.IMAGE_CDN_TOKEN
+      Authorization: token
     }
   })
   if (uploadResult.data.status) {
