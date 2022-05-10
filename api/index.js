@@ -6,6 +6,8 @@ module.exports = async (requestArg, responseArg) => {
     return await require('twikoo-vercel')(requestArg, responseArg)
   } else if (localhostRegex.test(requestArg.headers.origin) && localhostRegex.test(requestArg.headers.referer)) {
     return await require('twikoo-vercel')(requestArg, responseArg)
+  } else if (requestArg.headers['x-twikoo-recursion']) {
+    return await require('twikoo-vercel')(requestArg, responseArg)
   } else {
     return responseArg.end('')
   }
